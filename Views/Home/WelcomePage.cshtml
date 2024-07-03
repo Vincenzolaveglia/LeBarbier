@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "WelcomePage";
+}
+
+<div class="welcome-container">
+    <div class="text-content">
+        <h1 class="display-4">Benvenuto da LeBarbier</h1>
+        <p class="lead">
+            Siamo lieti di darti il benvenuto nel nostro salone.<br />
+            Esplora il nostro sito per saperne di più sui nostri servizi e prenotare il tuo appuntamento con un semplice click.
+        </p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Iniziamo", "Index", "Admin", new { area = "" }, new { @class = "btn btn-warning btn-lg" })
+            }
+            else
+            {
+                @Html.ActionLink("Iniziamo", "Index", "Reservations", new { area = "" }, new { @class = "btn btn-warning btn-lg" })
+            }
+        }
+        else
+        {
+            @Html.ActionLink("Iniziamo", "Login", "Auth", new { area = "" }, new { @class = "btn btn-warning btn-lg" })
+        }
+    </div>
+</div>
+
+<style>
+    .welcome-container {
+        background-image: url('/Content/imgs/fotoWelcomePage.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        font-family: "Cormorant Garamond", serif;
+    }
+
+    .text-content {
+        max-width: 600px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+    }
+
+    .btn {
+        margin-top: 20px;
+    }
+</style>
+
+

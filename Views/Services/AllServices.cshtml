@@ -1,0 +1,58 @@
+﻿@model List<LeBarbier.Models.OfferedService>
+
+@{
+    ViewBag.Title = "All Services";
+}
+
+<h2 class="text-center services-title">I nostri servizi</h2>
+
+<div class="container services-container">
+    <div>
+        @foreach (var service in Model)
+        {
+            <div class="mb-4 text-center">
+                <div class="service-card p-3 border rounded shadow-sm">
+                    <h3 class="service-name">@service.ServiceName</h3>
+                    <p class="service-description">@service.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .services-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        color: #343a40;
+        font-weight: bold;
+    }
+    .services-container {
+        font-family: "Cormorant Garamond", serif;
+    }
+    .service-card {
+        background-color: #f8f9fa;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+    .service-name {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .service-description {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+</style>

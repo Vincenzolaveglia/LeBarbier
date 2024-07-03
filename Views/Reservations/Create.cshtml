@@ -1,0 +1,94 @@
+﻿@model LeBarbier.Models.Reservation
+
+@{
+    ViewBag.Title = "Create Reservation";
+    var availableTimes = ViewBag.AvailableTimes as List<TimeSpan>;
+}
+
+<h2 class="text-center create-title">Prenotati</h2>
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container create-container text-center">
+        @using (Html.BeginForm("Create", "Reservations", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group mb-3">
+                <input type="date" name="reservationDate" class="form-control form-control-lg form-width" value="@ViewBag.SelectedDate" />
+            </div>
+
+            <div class="form-group mb-3">
+                <select name="reservationTime" class="form-control form-control-lg form-width">
+                    <option value="" disabled selected>Slot disponibili</option>
+                    @foreach (var time in availableTimes)
+                    {
+                        <option value="@time.ToString(@"hh\:mm")">@time.ToString(@"hh\:mm")</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <select name="serviceId" class="form-control form-control-lg form-width">
+                    @foreach (var service in ViewBag.Services)
+                    {
+                        <option value="@service.IdOfferedServices">@service.ServiceName</option>
+                    }
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">Prenota</button>
+        }
+    </div>
+</div>
+
+<style>
+    .create-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .create-container {
+        font-family: "Cormorant Garamond", serif;
+        background-color: #f8f9fa;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+    }
+
+    .form-width {
+        max-width: 100%;
+    }
+
+    .form-control-lg {
+        border-radius: 0.5rem;
+        border: 2px solid #ced4da;
+        padding: 1rem;
+        font-size: 1.25rem;
+    }
+
+        .form-control-lg:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+    .btn-lg {
+        font-size: 1.25rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+</style>

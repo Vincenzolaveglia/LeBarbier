@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Calendario Prenotazioni";
+}
+<div class="container-calendar-page">
+
+    <div class="calendar-container" id="calendar-container">
+        <h2>Benvenuto @ViewBag.Name</h2>
+        <div id="calendar"></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendarContainer = document.getElementById('calendar-container');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'it',
+            headerToolbar: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'today'
+            },
+            dateClick: function(info) {
+                window.location.href = '@Url.Action("Create", "Reservations")?selectedDate=' + info.dateStr;
+            },
+        });
+
+        calendar.render();
+
+        // Aggiungi classe per l'animazione dopo il rendering del calendario
+        calendarContainer.classList.add('calendar-loaded');
+    });
+</script>
+
+<style>
+    .container-calendar-page {
+        background-image: url('/Content/imgs/fotoWelcomePage.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+        font-family: "Cormorant Garamond", serif;
+    }
+
+    .calendar-container {
+        max-width: 900px;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.8); 
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        opacity: 0; 
+        transition: opacity 1.5s ease-in-out; 
+    }
+
+        .calendar-container.calendar-loaded {
+            opacity: 1; 
+        }
+
+    h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #343a40;
+    }
+
+    #calendar {
+        margin-top: 2rem;
+    }
+
+    .fc-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        text-transform: capitalize;
+    }
+
+    .fc .fc-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin: 0.2rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .fc .fc-button:hover {
+            background-color: black;
+        }
+
+    .fc .fc-button-primary {
+        background-color: #6c757d;
+        color: #fff;
+    }
+
+    .fc-daygrid-day-frame:hover {
+        cursor: pointer;
+    }
+
+    .fc-col-header-cell-cushion,
+    .fc-daygrid-day-number {
+        text-decoration: none;
+        color: black;
+    }
+
+        .fc-col-header-cell-cushion:hover,
+        .fc-daygrid-day-number:hover {
+            color: black;
+        }
+</style>

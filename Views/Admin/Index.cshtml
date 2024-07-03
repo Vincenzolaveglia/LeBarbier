@@ -1,0 +1,84 @@
+﻿@model IEnumerable<LeBarbier.Models.Reservation>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center admin-title">Benvenuto Admin</h2>
+
+<h2 class="text-center subtitle">Lista prenotazioni</h2>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>N° Prenotazione</th>
+                    <th>Nome & Cognome</th>
+                    <th>Numero di Telefono</th>
+                    <th>Data Prenotazione</th>
+                    <th>Orario Prenotazione</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in Model)
+                {
+                    <tr>
+                        <td>@reservation.IdReservation</td>
+                        <td>@reservation.Users.FirstName @reservation.Users.LastName</td>
+                        <td>@reservation.Users.PhoneNo</td>
+                        <td>@reservation.ReservationDate.ToString("dd/MM/yyyy")</td>
+                        <td>@reservation.ReservationTime.ToString(@"hh\:mm")</td>
+                        <td>
+                            <a href="@Url.Action("Delete", "Admin", new { id = reservation.IdReservation })" class="btn btn-danger btn-sm">Elimina</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<style>
+    .admin-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .subtitle {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #343a40;
+    }
+
+    th {
+        font-family: "Cormorant Garamond", serif;
+    }
+
+    .table {
+        width: 100%;
+        margin: auto;
+        background-color: #f8f9fa;
+    }
+
+        .table th,
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+    .btn-sm {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+    }
+</style>

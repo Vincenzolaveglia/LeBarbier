@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/Content/imgs/logo.jpeg">
+    <title>@ViewBag.Title - LeBarbier</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/locales-all.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        .title-brand {
+            font-family: "Dancing Script", cursive;
+            font-size: 50px;
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm ">
+        <div class="container-fluid">
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("LeBarbier", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand title-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("LeBarbier", "Index", "Reservations", new { area = "" }, new { @class = "navbar-brand title-brand" })
+                }
+            }
+            else
+            {
+                @Html.ActionLink("LeBarbier", "WelcomePage", "Home", new { area = "" }, new { @class = "navbar-brand title-brand" })
+            }
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Attiva/Disattiva spostamento" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Servizi", "AllServices", "Services", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Prenota", "Index", "Reservations", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Contatti", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Area Personale", "Index", "Profile", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="ml-auto">
+                            @using (Html.BeginForm("Logout", "Auth"))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="nav-link border-0 bg-transparent">
+                                    Logout
+                                </button>
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Servizi", "AllServices", "Services", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Prenota", "Index", "Reservations", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Contatti", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Auth", new { area = "" }, new { @class = "nav-link ml-auto" })</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div @*class="body-content"*@>
+        @RenderBody()
+        <hr />
+        <footer class="text-center">
+            <p>&copy; @DateTime.Now.Year - LeBarbier</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

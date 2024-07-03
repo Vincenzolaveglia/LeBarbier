@@ -1,0 +1,39 @@
+﻿@model LeBarbier.Models.Reservation
+
+@{
+    ViewBag.Title = "Delete Reservation";
+}
+
+<div class="container text-center">
+    <h3 class="fw-bold">Sei sicuro di voler eliminare questa prenotazione?</h3>
+    <div class="details">
+        <p><strong>N° Prenotazione:</strong> @Model.IdReservation</p>
+        <p><strong>Nome & Cognome:</strong> @Model.Users.FirstName @Model.Users.LastName</p>
+        <p><strong>Numero di Telefono:</strong> @Model.Users.PhoneNo</p>
+        <p><strong>Data Prenotazione:</strong> @Model.ReservationDate.ToString("dd/MM/yyyy")</p>
+        <p><strong>Orario Prenotazione:</strong> @Model.ReservationTime.ToString(@"hh\:mm")</p>
+    </div>
+
+    @using (Html.BeginForm("Delete", "Admin", new { id = Model.IdReservation }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Elimina</button>
+        <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">Annulla</a>
+    }
+</div>
+
+<style>
+
+    .container {
+        font-family: "Cormorant Garamond", serif;
+    }
+
+    .details p {
+        font-size: 1.25rem;
+        margin: 0.5rem 0;
+    }
+
+    .btn {
+        margin: 1rem 0.5rem;
+    }
+</style>

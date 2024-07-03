@@ -30,6 +30,15 @@ Responsive Design: LeBarbier è progettato con un design responsive che si adatt
 - L'admin NON si può registrare. Va aggiunto manualmente al database nella tabella "Users", mettendogli come id nel campo "RoleId" quello corrispondente all'id nella tabella "Roles".
 (Puoi trovare tutto nel file `Creazione DB`)
 
+## 📷 Preview
+## Versione Desktop
+![Foto Home Desktop](https://github.com/Vincenzolaveglia/LeBarbier/blob/master/Screenshot%20WP%20Desktop.png)
+![Foto Calendario Desktop](https://github.com/Vincenzolaveglia/LeBarbier/blob/master/Screenshot%20Calendar%20Desktop.png)
+
+## Versione Mobile
+![Foto Home Mobile](https://github.com/Vincenzolaveglia/LeBarbier/blob/master/Screenshot%20WP%20Mobile.png)
+![Foto Calendario Mobile](https://github.com/Vincenzolaveglia/LeBarbier/blob/master/Screenshot%20Calendar%20Mobile.png)
+
 ## Contributi
 
 Sii libero di contribuire al progetto mediante suggerimenti, segnalazioni di bug o richieste di nuove funzionalità. Segui le linee guida di GitHub per la collaborazione.
